@@ -1,15 +1,22 @@
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using RefTrackSearcher.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Desktop.Views;
+using RefTrackSearcher.Infrastructure.Services;
+using RefTrackSearcher.ViewModels;
+using System;
+using System.Linq;
 
 namespace RefTrackSearcher.Desktop
 {
     public partial class App : Application
     {
+        public static IServiceProvider? Services { get; private set; }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -17,18 +24,40 @@ namespace RefTrackSearcher.Desktop
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            Services = serviceCollection.BuildServiceProvider();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
+
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = Services.GetRequiredService<MainWindowViewModel>(),
                 };
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
+        {
+            services.AddLogging(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Information);
+#if DEBUG
+                builder.AddDebug();
+#endif
+            });
+
+            services.AddHttpClient();
+
+            services.AddSingleton<IJamendoService, JamendoService>();
+
+            services.AddTransient<MainWindowViewModel>();
+
         }
 
         private void DisableAvaloniaDataAnnotationValidation()
