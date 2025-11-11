@@ -1,20 +1,60 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="using:RefTrackSearcher.ViewModels"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="RefTrackSearcher.Desktop.Views.MainWindow"
-         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="RefTrackSearcher.Desktop">
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:RefTrackSearcher.ViewModels"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="RefTrackSearcher.Desktop.Views.MainWindow"
+		x:DataType="vm:MainWindowViewModel"
+		Icon="/Assets/avalonia-logo.ico"
+		Title="RefTrackSearcher.Desktop">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid RowDefinitions="Auto,*,*" Background="White">
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="Foreground" Value="Black"/>
+			</Style>
+		</Grid.Styles>
 
+		<TextBlock Grid.Row="0" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<Button Grid.Row="1"
+				Content="Search"
+				Width="100"
+				Height="35"
+				FontSize="14"
+				Command="{Binding SearchCommand}"
+				HorizontalContentAlignment="Center"
+				VerticalContentAlignment="Center"
+				FontWeight="Bold">
+			<Button.Styles>
+				<Style Selector="Button">
+					<Setter Property="Background" Value="#2D3748"/>
+					<Setter Property="Foreground" Value="White"/>
+					<Setter Property="BorderThickness" Value="1"/>
+					<Setter Property="BorderBrush" Value="#4A5568"/>
+				</Style>
+
+				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="#1A202C"/>
+				</Style>
+
+				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="#4A5568"/>
+				</Style>
+			</Button.Styles>
+		</Button>
+
+		<ItemsControl Grid.Row="2" ItemsSource="{Binding TestList}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
 </Window>
