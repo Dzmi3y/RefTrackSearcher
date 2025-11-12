@@ -1,0 +1,75 @@
+<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style Selector="TextBlock">
+		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+	</Style>
+
+	<Style Selector="Window">
+		<Setter Property="Background" Value="{DynamicResource BackgroundMainBrush}" />
+	</Style>
+
+
+	<Style Selector="Button.neutral /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="Padding" Value="16,8"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+
+	<Style Selector="Button.neutral:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+	</Style>
+
+	<Style Selector="Button.neutral:pressed /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource PressedBrush}"/>
+	</Style>
+
+	<Style Selector="Button.accent /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource AccentYellowBrush}" />
+		<Setter Property="Foreground" Value="{DynamicResource BackgroundMainBrush}" />
+		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+		<Setter Property="FontWeight" Value="SemiBold"/>
+		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="Padding" Value="16,8"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+
+	<Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="#FFE600"/>
+	</Style>
+
+	<Style Selector="Button.accent:pressed /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="#E6C200"/>
+	</Style>
+
+	<Style  Selector="TextBlock.secondary">
+		<Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+	</Style>
+
+	<Style  Selector="Border.card">
+		<Setter Property="Background" Value="{DynamicResource BackgroundCardBrush}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="Padding" Value="16" />
+	</Style>
+
+
+	<Style  Selector="TextBox">
+		<Setter Property="Background" Value="{DynamicResource BackgroundCardBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="CornerRadius" Value="4"/>
+		<Setter Property="Padding" Value="8"/>
+	</Style>
+
+	<Style Selector="TextBox:focus">
+		<Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}"/>
+	</Style>
+</Styles>

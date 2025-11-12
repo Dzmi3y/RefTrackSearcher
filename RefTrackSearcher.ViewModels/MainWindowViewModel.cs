@@ -17,7 +17,7 @@ namespace RefTrackSearcher.ViewModels
 
         public ICommand SearchCommand { get; }
 
-        public string Greeting { get; } = "Welcome to Avalonia!";
+        public string Greeting { get; } = "Welcome to Avalonia! Тест";
 
         public ObservableCollection<Track> TestList { get; set; } = new ObservableCollection<Track>();
 
