@@ -21,4 +21,7 @@
 	<SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource ColorHover}"/>
 	<SolidColorBrush x:Key="PressedBrush" Color="{DynamicResource ColorPressed}"/>
 
+		
+
+
 </ResourceDictionary>

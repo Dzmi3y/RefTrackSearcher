@@ -43,7 +43,8 @@
 		</Style>
 		</Button.Styles>
 		</Button>-->
-		<Button Grid.Row="1" Classes="accent" Content="Test" />
+		<TextBox Grid.Row="1" Classes="searchbox" Height="30" Width="100"  Watermark="Search..."/>
+		<!--<Button Grid.Row="1" Classes="accent" Content="Test" Height="30" Width="100" />-->
 
 
 

@@ -17,11 +17,10 @@
 		</ResourceDictionary>
 	</Application.Resources>
 
-
-
 	<Application.Styles>
-		<FluentTheme />
-		 <StyleInclude Source="avares://RefTrackSearcher.Desktop/Styles/GlobalStyles.axaml" />
+		<SimpleTheme />
+		<StyleInclude Source="avares://RefTrackSearcher.Desktop/Styles/GlobalStyles.axaml" />
+
 	</Application.Styles>
 
 </Application>
