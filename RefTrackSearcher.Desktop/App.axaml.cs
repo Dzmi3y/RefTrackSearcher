@@ -4,12 +4,15 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RefTrackSearcher.Core.Data;
 using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Desktop.Views;
 using RefTrackSearcher.Infrastructure.Services;
 using RefTrackSearcher.ViewModels;
 using System;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace RefTrackSearcher.Desktop
 {
@@ -44,6 +47,16 @@ namespace RefTrackSearcher.Desktop
 
         private void ConfigureServices(IServiceCollection services)
         {
+
+            var jsonString = File.ReadAllText("JamendoTags.json");
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var tagsData = JsonSerializer.Deserialize<JamendoTagsRoot>(jsonString, options);
+
+
             services.AddLogging(builder =>
             {
                 builder.SetMinimumLevel(LogLevel.Information);
@@ -54,6 +67,7 @@ namespace RefTrackSearcher.Desktop
 
             services.AddHttpClient();
 
+            services.AddSingleton<IJamendoTagsService>(new JamendoTagsService(tagsData));
             services.AddSingleton<IJamendoService, JamendoService>();
 
             services.AddTransient<MainWindowViewModel>();

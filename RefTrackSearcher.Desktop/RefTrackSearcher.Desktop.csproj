@@ -34,4 +34,10 @@
     <ProjectReference Include="..\RefTrackSearcher.Infrastructure\RefTrackSearcher.Infrastructure.csproj" />
     <ProjectReference Include="..\RefTrackSearcher.ViewModels\RefTrackSearcher.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="JamendoTags.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

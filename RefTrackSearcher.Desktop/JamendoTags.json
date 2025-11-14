@@ -1,0 +1,87 @@
+{
+  "jamendo_tags_categories": {
+    "genres": [
+      "rock",
+      "pop",
+      "electronic",
+      "hiphop",
+      "jazz",
+      "blues",
+      "classical",
+      "folk",
+      "ambient",
+      "metal",
+      "punk",
+      "reggae",
+      "latin",
+      "world",
+      "alternative",
+      "indie"
+    ],
+    "moods": [
+      "energetic",
+      "happy",
+      "sad",
+      "dark",
+      "calm",
+      "relaxing",
+      "melancholic",
+      "epic",
+      "romantic",
+      "dreamy",
+      "meditative"
+    ],
+    "instruments": {
+      "strings": [
+        "guitar",
+        "electric guitar",
+        "acoustic guitar",
+        "bass",
+        "violin",
+        "cello",
+        "strings"
+      ],
+      "keyboards": [
+        "piano",
+        "keyboards",
+        "synth",
+        "organ"
+      ],
+      "percussion": [
+        "drums",
+        "drum machine",
+        "percussion"
+      ],
+      "wind": [
+        "saxophone",
+        "trumpet",
+        "flute"
+      ],
+      "other": [
+        "orchestra",
+        "electronic beats"
+      ]
+    },
+    "vocals": [
+      "vocals",
+      "novocals",
+      "male",
+      "female",
+      "instrumental"
+    ],
+    "languages": [
+      "english",
+      "french",
+      "spanish",
+      "german",
+      "italian"
+    ],
+    "technical": [
+      "loop",
+      "soundtrack",
+      "corporate",
+      "party",
+      "christmas"
+    ]
+  }
+}

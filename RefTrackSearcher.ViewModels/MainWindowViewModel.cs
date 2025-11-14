@@ -9,10 +9,13 @@ namespace RefTrackSearcher.ViewModels
     public partial class MainWindowViewModel : ViewModelBase
     {
         private readonly IJamendoService _jamendoService;
-        public MainWindowViewModel(IJamendoService jamendoService)
+        private readonly IJamendoTagsService _jamendoTagsService;
+        public MainWindowViewModel(IJamendoService jamendoService, IJamendoTagsService jamendoTagsService)
         {
             _jamendoService = jamendoService;
+            _jamendoTagsService = jamendoTagsService;
             SearchCommand = new RelayCommand(async () => await SearchAsync());
+            var tagList = _jamendoTagsService.GetGenres();
         }
 
         public ICommand SearchCommand { get; }
