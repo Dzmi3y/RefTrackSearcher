@@ -10,7 +10,7 @@
 	</Style>
 
 
-	<Style Selector="Button.neutral /template/ ContentPresenter#PART_ContentPresenter">
+	<Style Selector="ToggleButton.tag /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
 		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
 		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
@@ -19,15 +19,20 @@
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
 	</Style>
 
-	<Style Selector="Button.neutral:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+	<Style Selector="ToggleButton.tag:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+		
+	<Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
 	</Style>
 
-	<Style Selector="Button.neutral:pressed /template/ ContentPresenter#PART_ContentPresenter">
+	<Style Selector="ToggleButton.tag:pressed /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
 		<Setter Property="Background" Value="{DynamicResource PressedBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
 	</Style>
 
-	<Style Selector="Button.accent /template/ ContentPresenter#PART_ContentPresenter">
+	<Style Selector="ToggleButton.tag:checked /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource AccentYellowBrush}" />
 		<Setter Property="Foreground" Value="{DynamicResource BackgroundMainBrush}" />
 		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
@@ -35,14 +40,6 @@
 		<Setter Property="CornerRadius" Value="8"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
-
-	<Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="#FFE600"/>
-	</Style>
-
-	<Style Selector="Button.accent:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="#E6C200"/>
 	</Style>
 
 	<Style  Selector="TextBlock.secondary">

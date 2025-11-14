@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -44,16 +44,18 @@
 		</Button.Styles>
 		</Button>-->
 		<TextBox Grid.Row="1" Classes="searchbox" Height="30" Width="100"  Watermark="Search..."/>
-		<!--<Button Grid.Row="1" Classes="accent" Content="Test" Height="30" Width="100" />-->
+		<ToggleButton Grid.Row="2" Classes="tag" Content="Test" Height="30" Width="100" />
+		<StackPanel Margin="20">
+   
+</StackPanel>
 
 
-
-		<ItemsControl Grid.Row="2" ItemsSource="{Binding TestList}">
+		<!--<ItemsControl Grid.Row="2" ItemsSource="{Binding TestList}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding Name}"/>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+		</ItemsControl>-->
 	</Grid>
 </Window>
