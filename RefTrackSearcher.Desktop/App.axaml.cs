@@ -8,7 +8,7 @@ using RefTrackSearcher.Core.Data;
 using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Desktop.Views;
 using RefTrackSearcher.Infrastructure.Services;
-using RefTrackSearcher.ViewModels;
+using RefTrackSearcher.Desktop.ViewModels;
 using System;
 using System.IO;
 using System.Linq;

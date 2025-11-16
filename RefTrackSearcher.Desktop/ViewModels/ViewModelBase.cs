@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace RefTrackSearcher.ViewModels
+namespace RefTrackSearcher.Desktop.ViewModels
 {
     public abstract class ViewModelBase : ObservableObject
     {
