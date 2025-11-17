@@ -1,107 +1,90 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Core.Models;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace RefTrackSearcher.Desktop.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public partial class MainWindowViewModel : ViewModelBase
     {
-        private string _searchText;
         private readonly IJamendoService _jamendoService;
         private readonly IJamendoTagsService _jamendoTagsService;
+        private string _searchText;
 
         public MainWindowViewModel(IJamendoService jamendoService, IJamendoTagsService jamendoTagsService)
         {
             _jamendoService = jamendoService;
             _jamendoTagsService = jamendoTagsService;
-            SearchCommand = new RelayCommand(async () => await SearchAsync());
-            LoadGanrestData(_jamendoTagsService.GetGenres());
+            
+            SearchCommand = new AsyncRelayCommand(SearchAsync);
+            Genres = new ObservableCollection<SelectableTag>();
+            SearchResultList = new ObservableCollection<Track>();
+            
+            LoadGenresData(_jamendoTagsService.GetGenres());
         }
 
         public ICommand SearchCommand { get; }
+        public ObservableCollection<Track> SearchResultList { get; }
+        public ObservableCollection<SelectableTag> Genres { get; }
 
         public string SearchText
         {
             get => _searchText;
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged(nameof(SearchText));
-            }
+            set => SetProperty(ref _searchText, value);
         }
 
-        public ObservableCollection<Track> SearchResultList { get; set; } = new ObservableCollection<Track>();
-        public ObservableCollection<SelectableTag> Genres { get; set; } = new ObservableCollection<SelectableTag>();
-
-        private void LoadGanrestData(List<string> tagList)
+        private void LoadGenresData(List<string> tagList)
         {
-            SearchResultList.Clear();
-
+            Genres.Clear();
+            
             foreach (var tag in tagList)
             {
-                Genres.Add(new SelectableTag() { Name = tag });
+                Genres.Add(new SelectableTag { Name = tag });
             }
         }
 
         private async Task SearchAsync()
         {
-            // string clientId = "";
-            // TrackQueryParams trackQueryParams = new TrackQueryParams()
-            // {
-            //     Tags = "rock"
-            // };
-            // var apiResponce = await _jamendoService.GetTracksAsync(clientId, trackQueryParams);
-            //
-            // if (apiResponce == null) return;
-            // if (!string.IsNullOrEmpty(apiResponce.Headers.ErrorMessage)) return;
-            //
-            // LoadSearchResultListData(apiResponce.Results);
+            const string clientId = "";
+            var trackQueryParams = new TrackQueryParams
+            {
+                Tags = GetSelectedTags(),
+                Name = _searchText
+            };
+            
+            var apiResponse = await _jamendoService.GetTracksAsync(clientId, trackQueryParams);
+            
+            if (apiResponse == null || !string.IsNullOrEmpty(apiResponse.Headers?.ErrorMessage)) 
+                return;
+
+            LoadSearchResultListData(apiResponse.Results);
         }
 
-        private void LoadSearchResultListData(List<Track> newTrackList)
+        private string GetSelectedTags() => string.Join("+", Genres.Where(g => g.IsSelected).Select(g => g.Name));
+
+        private void LoadSearchResultListData(List<Track> tracks)
         {
             SearchResultList.Clear();
-
-            foreach (var track in newTrackList)
+            
+            foreach (var track in tracks)
             {
                 SearchResultList.Add(track);
             }
         }
 
-        public class SelectableTag : INotifyPropertyChanged
+        public partial class SelectableTag : ObservableObject
         {
+            [ObservableProperty]
             private string _name;
+            
+            [ObservableProperty]
             private bool _isSelected;
-
-            public string Name
-            {
-                get => _name;
-                set
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-
-            public bool IsSelected
-            {
-                get => _isSelected;
-                set
-                {
-                    _isSelected = value;
-                    OnPropertyChanged(nameof(IsSelected));
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected virtual void OnPropertyChanged(string propertyName)
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -74,16 +74,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+	    <ItemsControl ItemsSource="{Binding SearchResultList}">
+		    <ItemsControl.ItemTemplate>
+			    <DataTemplate>
+				    <TextBlock Text="{Binding Name}"/>
+			    </DataTemplate>
+		    </ItemsControl.ItemTemplate>
+	    </ItemsControl>
     </StackPanel>
 
 
-    <!--<ItemsControl Grid.Row="2" ItemsSource="{Binding TestList}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding Name}"/>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>-->
+
     <!-- </Grid> -->
 </Window>
