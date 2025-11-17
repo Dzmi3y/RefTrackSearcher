@@ -42,8 +42,18 @@
 		</Button.Styles>
 		</Button>-->
     <StackPanel Margin=" 0 100">
-        <TextBox Classes="searchbox" Height="40" Margin="0 0 0 10" FontSize="20" Width="500" Watermark="Search..." />
+        <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
+            <TextBox Grid.Column="1" Height="40" FontSize="20" Width="500" Watermark="Search..."
+                     Text="{Binding SearchText, Mode=TwoWay}">
+                <TextBox.KeyBindings>
+                    <KeyBinding Gesture="Enter"
+                                Command="{Binding SearchCommand}" />
+                </TextBox.KeyBindings>
+            </TextBox>
+            <Button Grid.Column="2" Height="40" Width="40" Classes="search"
+                    Command="{Binding SearchCommand}" />
 
+        </Grid>
 
         <ItemsControl ItemsSource="{Binding Genres}">
             <ItemsControl.ItemsPanel>

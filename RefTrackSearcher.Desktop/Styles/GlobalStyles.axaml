@@ -1,82 +1,125 @@
 <Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Style Selector="TextBlock">
-		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
-		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-	</Style>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
 
-	<Style Selector="Window">
-		<Setter Property="Background" Value="{DynamicResource BackgroundMainBrush}" />
-	</Style>
-
-
-	<Style Selector="ToggleButton.tag /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
-		<Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
-		<Setter Property="CornerRadius" Value="8"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
-
-	<Style Selector="ToggleButton.tag:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
-		
-	<Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
-		<Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
-	</Style>
-
-	<Style Selector="ToggleButton.tag:pressed /template/ ContentPresenter#PART_ContentPresenter">
-				<Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
-		<Setter Property="Background" Value="{DynamicResource PressedBrush}"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
-	</Style>
-
-	<Style Selector="ToggleButton.tag:checked /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource AccentYellowBrush}" />
-		<Setter Property="Foreground" Value="{DynamicResource BackgroundMainBrush}" />
-		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
-		<Setter Property="FontWeight" Value="SemiBold"/>
-		<Setter Property="CornerRadius" Value="8"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
-
-	<Style  Selector="TextBlock.secondary">
-		<Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
-	</Style>
-
-	<Style  Selector="Border.card">
-		<Setter Property="Background" Value="{DynamicResource BackgroundCardBrush}" />
-		<Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="CornerRadius" Value="8" />
-		<Setter Property="Padding" Value="16" />
-	</Style>
-
-	<Style Selector="TextBox">
-		<Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
-		<Setter Property="Foreground" Value="{DynamicResource ColorTextPrimary}" />
-		<Setter Property="Background" Value="{DynamicResource ColorBackgroundCard}" />
-		<Setter Property="BorderBrush" Value="{DynamicResource ColorBorder}" />
-		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="CornerRadius" Value="6" />
-		<Setter Property="Padding" Value="8,4" />
-	</Style>
-
-	<Style Selector="TextBox:focus /template/ Border#border">
-		<Setter Property="BorderBrush" Value="{DynamicResource ColorAccentYellow}" />
-		<Setter Property="BorderThickness" Value="2" />
-	</Style>
-
-	<Style Selector="TextBox:pointerover /template/ Border#border">
-		<Setter Property="BorderBrush" Value="{DynamicResource ColorAccentYellow}" />
-	</Style>
-
-	<Style Selector="TextBox /template/ TextBlock#PART_Watermark">
-  <Setter Property="FontFamily" Value="Segoe UI"/>
-</Style>
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource BackgroundMainBrush}" />
+    </Style>
 
 
+    <Style Selector="ToggleButton.tag /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="ToggleButton.tag:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
+    </Style>
+
+    <Style Selector="ToggleButton.tag:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PressedBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
+
+    <Style Selector="ToggleButton.tag:checked /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundMainBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TextBlock.secondary">
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
+
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{DynamicResource BackgroundCardBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="16" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="Foreground" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="Background" Value="{DynamicResource ColorBackgroundCard}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ColorBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8 0 0 8" />
+        <Setter Property="Padding" Value="8,4" />
+    </Style>
+
+    <Style Selector="TextBox:focus /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{DynamicResource ColorAccentYellow}" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+
+    <Style Selector="TextBox:pointerover /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{DynamicResource ColorAccentYellow}" />
+    </Style>
+
+    <Style Selector="TextBox /template/ TextBlock#PART_Watermark">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
+
+
+    <Style Selector="Button.search /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <Image Source="{StaticResource WhiteSearchIcon}"
+                           Width="16" Height="16" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="CornerRadius" Value="0 8 8 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.search:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <Image Source="{StaticResource YellowSearchIcon}"
+                           Width="16" Height="16" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
+    </Style>
+
+    <Style Selector="Button.search:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <Image Source="{StaticResource YellowSearchIcon}"
+                           Width="16" Height="16" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PressedBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
 
 </Styles>

@@ -9,8 +9,9 @@ using System.Windows.Input;
 
 namespace RefTrackSearcher.Desktop.ViewModels
 {
-    public partial class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
+        private string _searchText;
         private readonly IJamendoService _jamendoService;
         private readonly IJamendoTagsService _jamendoTagsService;
 
@@ -23,6 +24,16 @@ namespace RefTrackSearcher.Desktop.ViewModels
         }
 
         public ICommand SearchCommand { get; }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+            }
+        }
 
         public ObservableCollection<Track> SearchResultList { get; set; } = new ObservableCollection<Track>();
         public ObservableCollection<SelectableTag> Genres { get; set; } = new ObservableCollection<SelectableTag>();
@@ -39,17 +50,17 @@ namespace RefTrackSearcher.Desktop.ViewModels
 
         private async Task SearchAsync()
         {
-            string clientId = "";
-            TrackQueryParams trackQueryParams = new TrackQueryParams()
-            {
-                Tags = "rock"
-            };
-            var apiResponce = await _jamendoService.GetTracksAsync(clientId, trackQueryParams);
-
-            if (apiResponce == null) return;
-            if (!string.IsNullOrEmpty(apiResponce.Headers.ErrorMessage)) return;
-
-            LoadSearchResultListData(apiResponce.Results);
+            // string clientId = "";
+            // TrackQueryParams trackQueryParams = new TrackQueryParams()
+            // {
+            //     Tags = "rock"
+            // };
+            // var apiResponce = await _jamendoService.GetTracksAsync(clientId, trackQueryParams);
+            //
+            // if (apiResponce == null) return;
+            // if (!string.IsNullOrEmpty(apiResponce.Headers.ErrorMessage)) return;
+            //
+            // LoadSearchResultListData(apiResponce.Results);
         }
 
         private void LoadSearchResultListData(List<Track> newTrackList)
@@ -61,15 +72,15 @@ namespace RefTrackSearcher.Desktop.ViewModels
                 SearchResultList.Add(track);
             }
         }
-        
+
         public class SelectableTag : INotifyPropertyChanged
         {
             private string _name;
             private bool _isSelected;
 
-            public string Name 
-            { 
-                get => _name; 
+            public string Name
+            {
+                get => _name;
                 set
                 {
                     _name = value;
@@ -77,9 +88,9 @@ namespace RefTrackSearcher.Desktop.ViewModels
                 }
             }
 
-            public bool IsSelected 
-            { 
-                get => _isSelected; 
+            public bool IsSelected
+            {
+                get => _isSelected;
                 set
                 {
                     _isSelected = value;
@@ -88,7 +99,8 @@ namespace RefTrackSearcher.Desktop.ViewModels
             }
 
             public event PropertyChangedEventHandler PropertyChanged;
-            protected virtual void OnPropertyChanged(string propertyName) 
+
+            protected virtual void OnPropertyChanged(string propertyName)
                 => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

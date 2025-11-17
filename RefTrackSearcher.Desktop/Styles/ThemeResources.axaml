@@ -1,27 +1,28 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<Color x:Key="ColorBackgroundMain">#121212</Color>
-	<Color x:Key="ColorBackgroundCard">#1A1A1A</Color>
-	<Color x:Key="ColorTextPrimary">#FFFFFF</Color>
-	<Color x:Key="ColorTextSecondary">#B2B2B2</Color>
-	<Color x:Key="ColorAccentYellow">#FFD700</Color>
-	<Color x:Key="ColorButtonBackground">#2C2C2C</Color>
-	<Color x:Key="ColorBorder">#2C2C2C</Color>
-	<Color x:Key="ColorHover">#3C3C3C</Color>
-	<Color x:Key="ColorPressed">#4C4C4C</Color>
+    <Color x:Key="ColorBackgroundMain">#121212</Color>
+    <Color x:Key="ColorBackgroundCard">#1A1A1A</Color>
+    <Color x:Key="ColorTextPrimary">#FFFFFF</Color>
+    <Color x:Key="ColorTextSecondary">#B2B2B2</Color>
+    <Color x:Key="ColorAccentYellow">#FFD700</Color>
+    <Color x:Key="ColorButtonBackground">#2C2C2C</Color>
+    <Color x:Key="ColorBorder">#2C2C2C</Color>
+    <Color x:Key="ColorHover">#3C3C3C</Color>
+    <Color x:Key="ColorPressed">#4C4C4C</Color>
 
-	<SolidColorBrush x:Key="BackgroundMainBrush" Color="{DynamicResource ColorBackgroundMain}"/>
-	<SolidColorBrush x:Key="BackgroundCardBrush" Color="{DynamicResource ColorBackgroundCard}"/>
-	<SolidColorBrush x:Key="TextPrimaryBrush" Color="{DynamicResource ColorTextPrimary}"/>
-	<SolidColorBrush x:Key="TextSecondaryBrush" Color="{DynamicResource ColorTextSecondary}"/>
-	<SolidColorBrush x:Key="AccentYellowBrush" Color="{DynamicResource ColorAccentYellow}"/>
-	<SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource ColorButtonBackground}"/>
-	<SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource ColorBorder}"/>
-	<SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource ColorHover}"/>
-	<SolidColorBrush x:Key="PressedBrush" Color="{DynamicResource ColorPressed}"/>
+    <SolidColorBrush x:Key="BackgroundMainBrush" Color="{DynamicResource ColorBackgroundMain}" />
+    <SolidColorBrush x:Key="BackgroundCardBrush" Color="{DynamicResource ColorBackgroundCard}" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{DynamicResource ColorTextPrimary}" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{DynamicResource ColorTextSecondary}" />
+    <SolidColorBrush x:Key="AccentYellowBrush" Color="{DynamicResource ColorAccentYellow}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource ColorButtonBackground}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource ColorBorder}" />
+    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource ColorHover}" />
+    <SolidColorBrush x:Key="PressedBrush" Color="{DynamicResource ColorPressed}" />
 
-		
+    <Bitmap x:Key="WhiteSearchIcon">/Assets/white-search-icon.png</Bitmap>
+    <Bitmap x:Key="YellowSearchIcon">/Assets/yellow-search-icon.png</Bitmap>
 
 
 </ResourceDictionary>
