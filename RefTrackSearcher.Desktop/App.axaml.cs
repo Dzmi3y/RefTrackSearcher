@@ -55,8 +55,9 @@ namespace RefTrackSearcher.Desktop
                 .Build();
 
             services.AddSingleton<IConfiguration>(configuration);
-            
             services.Configure<JamendoConfig>(configuration.GetSection("Jamendo"));
+            services.Configure<CacheConfig>(configuration.GetSection("Cache"));
+            
             var JamendoTags = File.ReadAllText("JamendoTags.json");
             var options = new JsonSerializerOptions
             {
@@ -75,8 +76,9 @@ namespace RefTrackSearcher.Desktop
             });
 
             services.AddHttpClient();
-
+            
             services.AddSingleton<IJamendoTagsService>(new JamendoTagsService(tagsData));
+            services.AddSingleton<IFileCacheService, FileCacheService>();
             services.AddSingleton<IJamendoService, JamendoService>();
 
             services.AddTransient<MainWindowViewModel>();

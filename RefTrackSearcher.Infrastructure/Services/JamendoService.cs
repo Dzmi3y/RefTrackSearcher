@@ -1,6 +1,6 @@
-﻿using RefTrackSearcher.Core.Interfaces.Services;
+﻿using System.Text.Json;
+using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Core.Models;
-using System.Text.Json;
 using Microsoft.Extensions.Options;
 using RefTrackSearcher.Core.Config;
 
@@ -11,34 +11,41 @@ namespace RefTrackSearcher.Infrastructure.Services
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://api.jamendo.com/v3.0/tracks/";
         private readonly IOptions<JamendoConfig> _options;
+        private readonly IFileCacheService _cacheService;
 
-        public JamendoService(IOptions<JamendoConfig> options)
+        public JamendoService(IOptions<JamendoConfig> options, IFileCacheService cacheService)
         {
             _httpClient = new HttpClient();
             _options = options;
+            _cacheService = cacheService;
         }
 
-        public async Task<ApiResponse> GetTracksAsync(TrackQueryParams parameters = null)
+        public async Task<ApiResponse?> GetTracksAsync(TrackQueryParams parameters = null)
         {
             try
             {
                 parameters ??= new TrackQueryParams();
+                var cacheKey = _cacheService.GenerateKey(
+                    parameters.Limit, parameters.Offset, parameters.Order, 
+                    parameters.Include, parameters.Tags, parameters.Name, 
+                    parameters.ArtistName, parameters.Id);
 
-                var queryString = BuildQueryString(parameters);
-                var url = $"{BaseUrl}?{queryString}";
-
-                Console.WriteLine($"Request URL: {url}");
-
-                var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                var json = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(json, new JsonSerializerOptions
+                return await _cacheService.GetOrCreateAsync(cacheKey, async () =>
                 {
-                    PropertyNameCaseInsensitive = true
-                });
+                    var queryString = BuildQueryString(parameters);
+                    var url = $"{BaseUrl}?{queryString}";
 
-                return apiResponse;
+                    Console.WriteLine($"Request URL: {url}");
+
+                    var response = await _httpClient.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<ApiResponse>(json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                });
             }
             catch (Exception ex)
             {
