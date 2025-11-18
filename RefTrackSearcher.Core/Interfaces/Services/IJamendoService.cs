@@ -4,7 +4,7 @@ namespace RefTrackSearcher.Core.Interfaces.Services
 {
     public interface IJamendoService
     {
-        Task<ApiResponse> GetTracksAsync(string сlientId, TrackQueryParams parameters = null);
+        Task<ApiResponse> GetTracksAsync(TrackQueryParams parameters = null);
         
     }
 }

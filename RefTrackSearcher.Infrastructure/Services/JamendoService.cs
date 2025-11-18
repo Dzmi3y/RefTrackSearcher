@@ -1,28 +1,30 @@
 ﻿using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Core.Models;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
+using RefTrackSearcher.Core.Config;
 
 namespace RefTrackSearcher.Infrastructure.Services
 {
-
-
-    public class JamendoService: IJamendoService
+    public class JamendoService : IJamendoService
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://api.jamendo.com/v3.0/tracks/";
+        private readonly IOptions<JamendoConfig> _options;
 
-        public JamendoService()
+        public JamendoService(IOptions<JamendoConfig> options)
         {
             _httpClient = new HttpClient();
+            _options = options;
         }
 
-        public async Task<ApiResponse> GetTracksAsync(string сlientId, TrackQueryParams parameters = null)
+        public async Task<ApiResponse> GetTracksAsync(TrackQueryParams parameters = null)
         {
             try
             {
                 parameters ??= new TrackQueryParams();
 
-                var queryString = BuildQueryString(parameters, сlientId);
+                var queryString = BuildQueryString(parameters);
                 var url = $"{BaseUrl}?{queryString}";
 
                 Console.WriteLine($"Request URL: {url}");
@@ -45,11 +47,11 @@ namespace RefTrackSearcher.Infrastructure.Services
             }
         }
 
-        private string BuildQueryString(TrackQueryParams parameters, string сlientId)
+        private string BuildQueryString(TrackQueryParams parameters)
         {
             var queryParams = new Dictionary<string, string>
             {
-                ["client_id"] = сlientId,
+                ["client_id"] = _options.Value.ClientId,
                 ["format"] = "json",
                 ["limit"] = parameters.Limit.ToString(),
                 ["offset"] = parameters.Offset.ToString(),

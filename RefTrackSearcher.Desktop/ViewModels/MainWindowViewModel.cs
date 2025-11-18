@@ -51,14 +51,13 @@ namespace RefTrackSearcher.Desktop.ViewModels
 
         private async Task SearchAsync()
         {
-            const string clientId = "";
             var trackQueryParams = new TrackQueryParams
             {
                 Tags = GetSelectedTags(),
                 Name = _searchText
             };
             
-            var apiResponse = await _jamendoService.GetTracksAsync(clientId, trackQueryParams);
+            var apiResponse = await _jamendoService.GetTracksAsync(trackQueryParams);
             
             if (apiResponse == null || !string.IsNullOrEmpty(apiResponse.Headers?.ErrorMessage)) 
                 return;

@@ -13,6 +13,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
+using RefTrackSearcher.Core.Config;
 
 namespace RefTrackSearcher.Desktop
 {
@@ -47,14 +49,21 @@ namespace RefTrackSearcher.Desktop
 
         private void ConfigureServices(IServiceCollection services)
         {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
-            var jsonString = File.ReadAllText("JamendoTags.json");
+            services.AddSingleton<IConfiguration>(configuration);
+            
+            services.Configure<JamendoConfig>(configuration.GetSection("Jamendo"));
+            var JamendoTags = File.ReadAllText("JamendoTags.json");
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            var tagsData = JsonSerializer.Deserialize<JamendoTagsRoot>(jsonString, options);
+            var tagsData = JsonSerializer.Deserialize<JamendoTagsRoot>(JamendoTags, options);
 
 
             services.AddLogging(builder =>
