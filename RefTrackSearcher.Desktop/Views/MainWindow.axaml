@@ -41,49 +41,63 @@
 		</Style>
 		</Button.Styles>
 		</Button>-->
-    <StackPanel Margin=" 0 100">
-        <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
-            <TextBox Grid.Column="1" Height="40" FontSize="20" Width="500" Watermark="Search..."
-                     Text="{Binding SearchText, Mode=TwoWay}">
-                <TextBox.KeyBindings>
-                    <KeyBinding Gesture="Enter"
-                                Command="{Binding SearchCommand}" />
-                </TextBox.KeyBindings>
-            </TextBox>
-            <Button Grid.Column="2" Height="40" Width="40" Classes="search"
-                    Command="{Binding SearchCommand}" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin=" 0 100">
+            <StackPanel>
+  <Button Content="Play" Click="Play_Click"/>
+  <Button Content="Pause" Click="Pause_Click"/>
+  <Button Content="Stop" Click="Stop_Click"/>
+</StackPanel>
+            <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
+                <TextBox Grid.Column="1" Height="40" FontSize="20" Width="500" Watermark="Search..."
+                         Text="{Binding SearchText, Mode=TwoWay}">
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Enter"
+                                    Command="{Binding SearchCommand}" />
+                    </TextBox.KeyBindings>
+                </TextBox>
+                <Button Grid.Column="2" Height="40" Width="40" Classes="search"
+                        Command="{Binding SearchCommand}" />
 
-        </Grid>
+            </Grid>
 
-        <ItemsControl ItemsSource="{Binding Genres}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="0" Columns="4" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+            <ItemsControl ItemsSource="{Binding Genres}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="0" Columns="4" HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ToggleButton Content="{Binding Name}"
-                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                  Margin="5"
-                                  Height="30"
-                                  Width="100"
-                                  Classes="tag" />
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton Content="{Binding Name}"
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                      Margin="5"
+                                      Height="30"
+                                      Width="100"
+                                      Classes="tag" />
 
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-	    <ItemsControl ItemsSource="{Binding SearchResultList}">
-		    <ItemsControl.ItemTemplate>
-			    <DataTemplate>
-				    <TextBlock Text="{Binding Name}"/>
-			    </DataTemplate>
-		    </ItemsControl.ItemTemplate>
-	    </ItemsControl>
-    </StackPanel>
-
-
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl Margin="200 20 200 0" ItemsSource="{Binding SearchResultList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="0 10 0 10">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <Image Grid.Column="0" 
+                                       Source="{Binding Image}" 
+                                       Width="50" 
+                                       Height="50" 
+                                       Margin="0,0,10,0"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 
     <!-- </Grid> -->
 </Window>
