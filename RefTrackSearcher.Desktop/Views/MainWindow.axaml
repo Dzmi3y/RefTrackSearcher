@@ -4,11 +4,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:RefTrackSearcher.Desktop.ViewModels"
         xmlns:local="clr-namespace:RefTrackSearcher.Desktop.Utils"
+        xmlns:behaviors="clr-namespace:RefTrackSearcher.Desktop.Behaviors"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RefTrackSearcher.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="RefTrackSearcher.Desktop">
+        Title="RefTrackSearcher.Desktop"
+        x:Name="Main">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
@@ -44,11 +46,6 @@
 		</Button>-->
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin=" 0 100">
-            <StackPanel>
-                <Button Content="Play" Click="Play_Click" />
-                <Button Content="Pause" Click="Pause_Click" />
-                <Button Content="Stop" Click="Stop_Click" />
-            </StackPanel>
             <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
                 <TextBox Grid.Column="1" Height="40" FontSize="20" Width="500" Watermark="Search..."
                          Text="{Binding SearchText, Mode=TwoWay}">
@@ -87,13 +84,25 @@
                         <Border Classes="card" Margin="0 10 0 10">
                             <Grid ColumnDefinitions="Auto,*,Auto">
                                 <Image Grid.Column="0"
-                                       Source="{Binding AlbumImage, Converter={x:Static local:UrlToBitmapConverter.Instance}}"
+                                       Source="{Binding Track.AlbumImage, Converter={x:Static local:UrlToBitmapConverter.Instance}}"
                                        Width="200"
                                        Height="200"
                                        Margin="0,0,10,0" />
                                 <Grid Grid.Column="1" RowDefinitions="Auto,Auto,*">
-                                    <SelectableTextBlock Classes="track_name" Grid.Row="0" Text="{Binding Name}" />
-                                    <SelectableTextBlock Classes="artist_name" Grid.Row="1" Text="{Binding ArtistName}" />
+                                    <SelectableTextBlock Classes="track_name" Grid.Row="0" Text="{Binding Track.Name}" />
+                                    <SelectableTextBlock Classes="artist_name" Grid.Row="1" Text="{Binding Track.ArtistName}" />
+                                    <Grid ColumnDefinitions="Auto,Auto,*" Grid.Row="2">
+                                        <Button Grid.Column="0" Content="Play"
+                                                Command="{Binding DataContext.PlayPauseCommand, ElementName=Main}"
+                                                CommandParameter="{Binding .}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:PlayPauseButtonBehavior IsPlaying="{Binding IsPlaying}"/>
+                                            </Interaction.Behaviors>
+                                        </Button>
+
+                                        <Button Grid.Column="1" Content="Stop"
+                                                Command="{Binding DataContext.StopCommand, ElementName=Main}" />
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Border>
