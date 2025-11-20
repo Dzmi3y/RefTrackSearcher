@@ -4,6 +4,16 @@
         <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
     </Style>
+    <Style Selector="SelectableTextBlock.track_name">
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
+    <Style Selector="SelectableTextBlock.artist_name">
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="Padding" Value="0 15 0 0" />
+    </Style>
 
     <Style Selector="Window">
         <Setter Property="Background" Value="{DynamicResource BackgroundMainBrush}" />

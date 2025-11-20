@@ -45,10 +45,10 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin=" 0 100">
             <StackPanel>
-  <Button Content="Play" Click="Play_Click"/>
-  <Button Content="Pause" Click="Pause_Click"/>
-  <Button Content="Stop" Click="Stop_Click"/>
-</StackPanel>
+                <Button Content="Play" Click="Play_Click" />
+                <Button Content="Pause" Click="Pause_Click" />
+                <Button Content="Stop" Click="Stop_Click" />
+            </StackPanel>
             <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
                 <TextBox Grid.Column="1" Height="40" FontSize="20" Width="500" Watermark="Search..."
                          Text="{Binding SearchText, Mode=TwoWay}">
@@ -86,12 +86,15 @@
                     <DataTemplate>
                         <Border Classes="card" Margin="0 10 0 10">
                             <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Image Grid.Column="0" 
+                                <Image Grid.Column="0"
                                        Source="{Binding AlbumImage, Converter={x:Static local:UrlToBitmapConverter.Instance}}"
-                                       Width="200" 
-                                       Height="200" 
-                                       Margin="0,0,10,0"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                                       Width="200"
+                                       Height="200"
+                                       Margin="0,0,10,0" />
+                                <Grid Grid.Column="1" RowDefinitions="Auto,Auto,*">
+                                    <SelectableTextBlock Classes="track_name" Grid.Row="0" Text="{Binding Name}" />
+                                    <SelectableTextBlock Classes="artist_name" Grid.Row="1" Text="{Binding ArtistName}" />
+                                </Grid>
                             </Grid>
                         </Border>
                     </DataTemplate>
