@@ -19,6 +19,67 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundMainBrush}" />
     </Style>
 
+    <Style Selector="Button.player /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="40" />
+    </Style>
+
+    <Style Selector="Button.player:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
+    </Style>
+
+    <Style Selector="Button.playing">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <TextBlock Text="❚❚"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource AccentYellowBrush}"
+                               TextAlignment="Center" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="Button:not(.playing)">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <TextBlock Text="▶"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="Button.stop">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <TextBlock Text="■"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.player:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PressedBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
 
     <Style Selector="ToggleButton.tag /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />

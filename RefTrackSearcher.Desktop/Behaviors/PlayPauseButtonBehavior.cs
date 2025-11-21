@@ -35,19 +35,7 @@ public class PlayPauseButtonBehavior : Behavior<Button>
     {
         if (AssociatedObject == null) return;
 
-        if (IsPlaying)
-        {
-            AssociatedObject.Content = "Pause";
-            AssociatedObject.Background = Brushes.Red;
-            AssociatedObject.Foreground = Brushes.White;
-            AssociatedObject.FontWeight = FontWeight.Bold;
-        }
-        else
-        {
-            AssociatedObject.Content = "Play";
-            AssociatedObject.Background = Brushes.Green;
-            AssociatedObject.Foreground = Brushes.Black;
-            AssociatedObject.FontWeight = FontWeight.Normal;
-        }
+        AssociatedObject.Classes.Set("playing", IsPlaying);
+        AssociatedObject.Classes.Set("paused", !IsPlaying);
     }
 }
