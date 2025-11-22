@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LibVLCSharp.Shared;
 using RefTrackSearcher.Core.Interfaces.Services;
 using RefTrackSearcher.Core.Models;
 
@@ -16,6 +17,7 @@ namespace RefTrackSearcher.Desktop.ViewModels
         private readonly IJamendoTagsService _jamendoTagsService;
         private string _searchText;
         private readonly AudioPlayer.AudioPlayer _player = new AudioPlayer.AudioPlayer();
+        private TrackViewModel _currentTrack;
 
         [ObservableProperty] private string _currentTrackUrl;
 
@@ -31,6 +33,7 @@ namespace RefTrackSearcher.Desktop.ViewModels
             SearchResultList = new ObservableCollection<TrackViewModel>();
 
             LoadGenresData(_jamendoTagsService.GetGenres());
+            _player.PositionChanged += OnTrackPositionChanged;
         }
 
         public ICommand SearchCommand { get; }
@@ -83,11 +86,17 @@ namespace RefTrackSearcher.Desktop.ViewModels
             }
         }
 
+        private void OnTrackPositionChanged(object? sender, MediaPlayerPositionChangedEventArgs args)
+        {
+            _currentTrack.Position = args.Position == -1 ? 0 : args.Position;
+        }
+
         private void PlayPause(TrackViewModel track)
         {
             string url = track.Track.Audio;
             if (url != CurrentTrackUrl)
             {
+                _currentTrack = track;
                 _player.Play(url);
                 CurrentTrackUrl = url;
                 ResetCurrentlyPlayingTrack();

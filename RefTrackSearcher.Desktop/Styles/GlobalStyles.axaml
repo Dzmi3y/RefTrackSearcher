@@ -193,4 +193,18 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
     </Style>
 
+    <Style Selector="Slider:horizontal /template/ Thumb">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Border Width="20" Height="20"
+                            Background="{DynamicResource AccentYellowBrush}"
+                            CornerRadius="8"
+                            BorderBrush="Black"
+                            BorderThickness="2"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
 </Styles>
