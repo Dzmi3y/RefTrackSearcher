@@ -104,13 +104,19 @@
                                         </Button>
 
                                         <Button Grid.Column="1" Classes="player stop"
-                                                Command="{Binding DataContext.StopCommand, ElementName=Main}" />
+                                                Command="{Binding DataContext.StopCommand, ElementName=Main}"
+                                                CommandParameter="{Binding .}" />
                                         <Slider Grid.Column="2"
                                                 Value="{Binding Position, Mode=TwoWay}"
                                                 Minimum="0"
                                                 Maximum="1"
                                                 Margin="10"
                                                 Width="300">
+                                            <Interaction.Behaviors>
+                                                <behaviors:SliderValueChangedBehavior
+                                                    Command="{Binding DataContext.PositionChangedCommand, ElementName=Main}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Interaction.Behaviors>
 
                                         </Slider>
 

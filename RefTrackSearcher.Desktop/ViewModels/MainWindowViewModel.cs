@@ -28,7 +28,8 @@ namespace RefTrackSearcher.Desktop.ViewModels
 
             SearchCommand = new AsyncRelayCommand(SearchAsync);
             PlayPauseCommand = new RelayCommand<TrackViewModel>(PlayPause);
-            StopCommand = new RelayCommand(Stop);
+            StopCommand = new RelayCommand<TrackViewModel>(Stop);
+            PositionChangedCommand = new RelayCommand<TrackViewModel>(PositionChanged);
             Genres = new ObservableCollection<SelectableTag>();
             SearchResultList = new ObservableCollection<TrackViewModel>();
 
@@ -39,6 +40,7 @@ namespace RefTrackSearcher.Desktop.ViewModels
         public ICommand SearchCommand { get; }
         public ICommand PlayPauseCommand { get; }
         public ICommand StopCommand { get; }
+        public ICommand PositionChangedCommand { get; }
         public ObservableCollection<TrackViewModel> SearchResultList { get; }
         public ObservableCollection<SelectableTag> Genres { get; }
 
@@ -88,7 +90,10 @@ namespace RefTrackSearcher.Desktop.ViewModels
 
         private void OnTrackPositionChanged(object? sender, MediaPlayerPositionChangedEventArgs args)
         {
-            _currentTrack.Position = args.Position == -1 ? 0 : args.Position;
+            if (args.Position != -1)
+            {
+                _currentTrack.Position = args.Position;
+            }
         }
 
         private void PlayPause(TrackViewModel track)
@@ -101,6 +106,7 @@ namespace RefTrackSearcher.Desktop.ViewModels
                 CurrentTrackUrl = url;
                 ResetCurrentlyPlayingTrack();
                 track.IsPlaying = true;
+                _player.Position = track.Position;
             }
             else
             {
@@ -109,11 +115,16 @@ namespace RefTrackSearcher.Desktop.ViewModels
             }
         }
 
-        private void Stop()
+        private void Stop(TrackViewModel track)
         {
-            _player.Stop();
-            CurrentTrackUrl = null;
-            ResetCurrentlyPlayingTrack();
+            if (track.IsPlaying)
+            {
+                _player.Stop();
+                CurrentTrackUrl = null;
+                ResetCurrentlyPlayingTrack();
+            }
+
+            track.Position = 0;
         }
 
         private void ResetCurrentlyPlayingTrack()
@@ -122,6 +133,14 @@ namespace RefTrackSearcher.Desktop.ViewModels
             if (currentlyPlayingTrack != null)
             {
                 currentlyPlayingTrack.IsPlaying = false;
+            }
+        }
+
+        private void PositionChanged(TrackViewModel track)
+        {
+            if (track.IsPlaying)
+            {
+                _player.Position = track.Position;
             }
         }
 
