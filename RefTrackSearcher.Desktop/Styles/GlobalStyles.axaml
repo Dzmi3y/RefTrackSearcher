@@ -74,6 +74,19 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style Selector="Button.download">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Template>
+                    <TextBlock Text="⇩"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Template>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style Selector="Button.player:pressed /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />

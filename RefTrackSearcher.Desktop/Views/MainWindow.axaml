@@ -15,35 +15,6 @@
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <!-- <Grid RowDefinitions="Auto,*,*"> -->
-
-    <!--		<Button Grid.Row="1"
-		Content="Search"
-		Width="100"
-		Height="35"
-		FontSize="14"
-		Command="{Binding SearchCommand}"
-		HorizontalContentAlignment="Center"
-		VerticalContentAlignment="Center"
-		FontWeight="Bold">
-		<Button.Styles>
-		<Style Selector="Button">
-		<Setter Property="Background" Value="#2D3748"/>
-		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="BorderBrush" Value="#4A5568"/>
-		</Style>
-
-		<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="#1A202C"/>
-		</Style>
-
-		<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="#4A5568"/>
-		</Style>
-		</Button.Styles>
-		</Button>-->
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin=" 0 100">
             <Grid ColumnDefinitions="*,Auto,Auto,*" Margin="0 0 0 10">
@@ -92,7 +63,7 @@
                                     <SelectableTextBlock Classes="track_name" Grid.Row="0" Text="{Binding Track.Name}" />
                                     <SelectableTextBlock Classes="artist_name" Grid.Row="1"
                                                          Text="{Binding Track.ArtistName}" />
-                                    <Grid ColumnDefinitions="Auto,Auto,*" Grid.Row="2">
+                                    <Grid ColumnDefinitions="Auto,Auto,*,Auto" Grid.Row="2">
                                         <Button Grid.Column="0"
                                                 Margin="0 0 10 0"
                                                 Classes="player"
@@ -107,11 +78,11 @@
                                                 Command="{Binding DataContext.StopCommand, ElementName=Main}"
                                                 CommandParameter="{Binding .}" />
                                         <Slider Grid.Column="2"
+                                                VerticalAlignment="Center"
                                                 Value="{Binding Position, Mode=TwoWay}"
                                                 Minimum="0"
                                                 Maximum="1"
-                                                Margin="10"
-                                                Width="300">
+                                                Margin="20 0 20 0">
                                             <Interaction.Behaviors>
                                                 <behaviors:SliderValueChangedBehavior
                                                     Command="{Binding DataContext.PositionChangedCommand, ElementName=Main}"
@@ -119,7 +90,9 @@
                                             </Interaction.Behaviors>
 
                                         </Slider>
-
+                                        <Button Grid.Column="3" Classes="player download"
+                                                Click="Button_OnClick"
+                                                CommandParameter="{Binding .}" />
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -129,6 +102,4 @@
             </ItemsControl>
         </StackPanel>
     </ScrollViewer>
-
-    <!-- </Grid> -->
 </Window>

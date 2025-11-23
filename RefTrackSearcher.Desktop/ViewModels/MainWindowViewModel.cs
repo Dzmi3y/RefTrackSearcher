@@ -36,7 +36,7 @@ namespace RefTrackSearcher.Desktop.ViewModels
             LoadGenresData(_jamendoTagsService.GetGenres());
             _player.PositionChanged += OnTrackPositionChanged;
         }
-
+        
         public ICommand SearchCommand { get; }
         public ICommand PlayPauseCommand { get; }
         public ICommand StopCommand { get; }

@@ -1,7 +1,10 @@
-using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using LibVLCSharp.Shared;
+using RefTrackSearcher.Desktop.ViewModels;
 
 namespace RefTrackSearcher.Desktop.Views
 {
@@ -11,22 +14,44 @@ namespace RefTrackSearcher.Desktop.Views
         {
             InitializeComponent();
         }
-        private AudioPlayer.AudioPlayer _player = new AudioPlayer.AudioPlayer();
-
-        private void Play_Click(object sender, RoutedEventArgs e)
+        
+        private async Task DownloadTrack(TrackViewModel track)
         {
-            _player.Play("https://prod-1.storage.jamendo.com/?trackid=1204669&format=mp31&from=LX4NAEWkWiF0r1bYb9vDTg%3D%3D%7C7oFQzDzSX%2BAA7CvEtVryUg%3D%3D");
-
+            string url = track.Track.AudioDownload;
+    
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsByteArrayAsync();
+                    
+                    var saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Title = "Save Track As";
+                    saveFileDialog.InitialFileName = $"{track.Track.ArtistName} - {track.Track.Name}.mp3";
+                    saveFileDialog.Filters = new List<FileDialogFilter>()
+                    {
+                        new FileDialogFilter()
+                        {
+                            Name = "Audio files",
+                            Extensions = new List<string> { ".mp3", ".wave" }
+                        }
+                    };
+            
+                    if (await saveFileDialog.ShowAsync(this) is string filePath)
+                    {
+                        await File.WriteAllBytesAsync(filePath, content);
+                    }
+                }
+            }
         }
 
-        private void Pause_Click(object sender, RoutedEventArgs e)
+        private async void Button_OnClick(object? sender, RoutedEventArgs e)
         {
-            _player.Pause();
-        }
-
-        private void Stop_Click(object sender, RoutedEventArgs e)
-        {
-            _player.Stop();
+            if (sender is Button button && button.CommandParameter is TrackViewModel track)
+            {
+                await DownloadTrack(track);
+            }
         }
     }
 }
