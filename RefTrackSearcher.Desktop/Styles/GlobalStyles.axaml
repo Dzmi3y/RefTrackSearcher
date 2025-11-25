@@ -88,12 +88,6 @@
         </Setter>
     </Style>
 
-    <Style Selector="Button.player:pressed /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
-        <Setter Property="Background" Value="{DynamicResource PressedBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
-    </Style>
-
     <Style Selector="ToggleButton.tag /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
@@ -135,6 +129,16 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="Padding" Value="16" />
+        <Style.Animations>
+            <Animation Duration="0:0:2" Delay="0">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
     </Style>
 
     <Style Selector="TextBox">
@@ -218,6 +222,27 @@
                 </Grid>
             </ControlTemplate>
         </Setter>
+    </Style>
+    
+    <Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontInter}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentYellowBrush}" />
+    </Style>
+
+    <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource AccentYellowBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PressedBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
     </Style>
 
 </Styles>

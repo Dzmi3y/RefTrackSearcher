@@ -100,6 +100,13 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Button
+                Width="150"
+                Height="30"
+                CornerRadius="8"
+                Command="{Binding LoadNextPageCommand}"
+                IsVisible="{Binding IsNextPageExist}"
+                Content="Show more" />
         </StackPanel>
     </ScrollViewer>
 </Window>

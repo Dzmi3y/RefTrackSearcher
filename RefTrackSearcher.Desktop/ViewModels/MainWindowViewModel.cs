@@ -18,7 +18,12 @@ namespace RefTrackSearcher.Desktop.ViewModels
         private string _searchText;
         private readonly AudioPlayer.AudioPlayer _player = new AudioPlayer.AudioPlayer();
         private TrackViewModel _currentTrack;
+        private string? _nextPageUrl;
+        private TrackQueryParams _lastTrackQueryParams;
+        private readonly int _pageSize = 10;
 
+
+        [ObservableProperty] private bool _isNextPageExist;
         [ObservableProperty] private string _currentTrackUrl;
 
         public MainWindowViewModel(IJamendoService jamendoService, IJamendoTagsService jamendoTagsService)
@@ -30,17 +35,20 @@ namespace RefTrackSearcher.Desktop.ViewModels
             PlayPauseCommand = new RelayCommand<TrackViewModel>(PlayPause);
             StopCommand = new RelayCommand<TrackViewModel>(Stop);
             PositionChangedCommand = new RelayCommand<TrackViewModel>(PositionChanged);
+            LoadNextPageCommand = new AsyncRelayCommand(LoadPageAsync);
             Genres = new ObservableCollection<SelectableTag>();
             SearchResultList = new ObservableCollection<TrackViewModel>();
 
             LoadGenresData(_jamendoTagsService.GetGenres());
             _player.PositionChanged += OnTrackPositionChanged;
         }
-        
+
         public ICommand SearchCommand { get; }
         public ICommand PlayPauseCommand { get; }
         public ICommand StopCommand { get; }
         public ICommand PositionChangedCommand { get; }
+
+        public ICommand LoadNextPageCommand { get; }
         public ObservableCollection<TrackViewModel> SearchResultList { get; }
         public ObservableCollection<SelectableTag> Genres { get; }
 
@@ -62,27 +70,37 @@ namespace RefTrackSearcher.Desktop.ViewModels
 
         private async Task SearchAsync()
         {
-            var trackQueryParams = new TrackQueryParams
+            SearchResultList.Clear();
+
+            _lastTrackQueryParams = new TrackQueryParams
             {
                 Tags = GetSelectedTags(),
-                Name = _searchText
+                Name = _searchText,
+                Offset = 0,
+                Limit = _pageSize
             };
+            await LoadPageAsync();
+        }
 
-            var apiResponse = await _jamendoService.GetTracksAsync(trackQueryParams);
+        private async Task LoadPageAsync()
+        {
+            var apiResponse = await _jamendoService.GetTracksAsync(_lastTrackQueryParams);
 
             if (apiResponse == null || !string.IsNullOrEmpty(apiResponse.Headers?.ErrorMessage))
                 return;
 
-            LoadSearchResultListData(apiResponse.Results);
+            LoadSearchResultListData(apiResponse);
+            _lastTrackQueryParams.Offset += _pageSize;
         }
 
         private string GetSelectedTags() => string.Join("+", Genres.Where(g => g.IsSelected).Select(g => g.Name));
 
-        private void LoadSearchResultListData(List<Track> tracks)
+        private void LoadSearchResultListData(ApiResponse apiResponse)
         {
-            SearchResultList.Clear();
+            _nextPageUrl = apiResponse.Headers?.Next;
+            IsNextPageExist = !string.IsNullOrEmpty(_nextPageUrl);
 
-            foreach (var track in tracks)
+            foreach (var track in apiResponse.Results)
             {
                 SearchResultList.Add(new TrackViewModel(track));
             }
